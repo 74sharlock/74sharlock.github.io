@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+}
+.container-1 {
+  width: 100%;
+  margin: 200px auto;
+}
+.list {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+.list > .item {
+  display: flex;
+  -webkit-transition: flex-grow 0.5s ease;
+  -moz-transition: flex-grow 0.5s ease;
+  -ms-transition: flex-grow 0.5s ease;
+  -o-transition: flex-grow 0.5s ease;
+  transition: flex-grow 0.5s ease;
+  flex-grow: 1;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.list > .item.cornflowerblue {
+  background-color: cornflowerblue;
+}
+.list > .item.coral {
+  background-color: coral;
+}
+.list > .item.crimson {
+  background-color: crimson;
+}
+.list > .item:hover {
+  flex-grow: 3;
+}
+.list.bezier-1 .item {
+  -webkit-transition-timing-function: cubic-bezier(0.63, -0.1, 0.19, 1.09);
+  -moz-transition-timing-function: cubic-bezier(0.63, -0.1, 0.19, 1.09);
+  -ms-transition-timing-function: cubic-bezier(0.63, -0.1, 0.19, 1.09);
+  -o-transition-timing-function: cubic-bezier(0.63, -0.1, 0.19, 1.09);
+  transition-timing-function: cubic-bezier(0.63, -0.1, 0.19, 1.09);
+}
+.list.bezier-1 .item:hover {
+  flex-grow: 4;
+}
+.list.bezier-2 .item {
+  -webkit-transition-timing-function: cubic-bezier(0.9, -0.43, 0.14, 1.49);
+  -moz-transition-timing-function: cubic-bezier(0.9, -0.43, 0.14, 1.49);
+  -ms-transition-timing-function: cubic-bezier(0.9, -0.43, 0.14, 1.49);
+  -o-transition-timing-function: cubic-bezier(0.9, -0.43, 0.14, 1.49);
+  transition-timing-function: cubic-bezier(0.9, -0.43, 0.14, 1.49);
+}
+.list.bezier-2 .item:hover {
+  flex-grow: 10;
+}

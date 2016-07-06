@@ -1,0 +1,57 @@
+@import "./common.less";
+
+.list {
+  height: 200px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  > .item {
+    display: flex;
+    -webkit-transition: flex-grow .5s ease;
+    -moz-transition: flex-grow .5s ease;
+    -ms-transition: flex-grow .5s ease;
+    -o-transition: flex-grow .5s ease;
+    transition: flex-grow .5s ease;
+    flex-grow: 1;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    &.cornflowerblue {
+      background-color: cornflowerblue;
+    }
+    &.coral {
+      background-color: coral;
+    }
+    &.crimson {
+      background-color: crimson;
+    }
+    &:hover {
+      flex-grow: 3;
+    }
+  }
+  &.bezier-1 {
+    .item {
+      -webkit-transition-timing-function: cubic-bezier(0.63, -0.1, 0.19, 1.09);
+      -moz-transition-timing-function: cubic-bezier(0.63, -0.1, 0.19, 1.09);
+      -ms-transition-timing-function: cubic-bezier(0.63, -0.1, 0.19, 1.09);
+      -o-transition-timing-function: cubic-bezier(0.63, -0.1, 0.19, 1.09);
+      transition-timing-function: cubic-bezier(0.63, -0.1, 0.19, 1.09);
+      &:hover {
+        flex-grow: 4;
+      }
+    }
+  }
+
+  &.bezier-2 {
+    .item {
+      -webkit-transition-timing-function: cubic-bezier(0.9, -0.43, 0.14, 1.49);;
+      -moz-transition-timing-function: cubic-bezier(0.9, -0.43, 0.14, 1.49);
+      -ms-transition-timing-function: cubic-bezier(0.9, -0.43, 0.14, 1.49);
+      -o-transition-timing-function: cubic-bezier(0.9, -0.43, 0.14, 1.49);
+      transition-timing-function: cubic-bezier(0.9, -0.43, 0.14, 1.49);
+      &:hover {
+        flex-grow: 10;
+      }
+    }
+  }
+}
