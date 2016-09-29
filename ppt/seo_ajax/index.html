@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+        <meta name="author" content="Hakim El Hattab">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<title>ajax && seo</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+                    <h1>{ ajax && seo }</h1>
+                    <p style="text-align: right;">By 74sharlock</p>
+				</section>
+
+                <section>
+                    <h2>Ajax.purpose : </h2>
+                    <h2>{</h2>
+                    <ul>
+                        <li class="fragment"> one: 'no refresh page',</li>
+                        <li class="fragment"> two: 'request less data',</li>
+                        <li class="fragment"> three: 'reduce server pressure'</li>
+                    </ul>
+                    <h3>}</h3>
+                </section>
+
+                <section>
+                    <h2>seo.purpose :</h2>
+                    <h2>{</h2>
+                    <p class="fragment">// Mr. Yang has shared it.</p>
+                    <h3>}</h3>
+                </section>
+
+                <section data-background-transition="zoom" data-background-color="#b5533c">
+                    <section>
+                        <p style="font-size: 1.6em;">Some search engines said:</p>
+                        <p>"</p>
+                        <div class="fragment">
+                            <div>SEO is fine.</div>
+                            <div>But I can't understand Ajax.</div>
+                        </div>
+                        <p>"</p>
+                    </section>
+                    <section><img src="/images/1.png" alt=""> <p class="fragment">Not Happy</p></section>
+                </section>
+                <section data-background-transition="zoom" data-background-color="#222">
+                    <p>Is there a way to guaranteeing SEO while using Ajax?</p>
+                </section>
+                <section data-background-transition="zoom" data-background-color="#4d7e65">
+                    <p>My solution:</p>
+                    <ol style="font-size: 28px;">
+                        <li class="fragment">Do SEO.</li>
+                        <li class="fragment">Mark internal links.</li>
+                        <li class="fragment">Write a javascript : Prevent these links to jump when they are be clicked.</li>
+                        <li class="fragment">Write a javascript : when they are be clicked, use Ajax [post method] request data.</li>
+                        <li class="fragment">Modify server code(maybe it's in controller) :
+                            <br>Determine the request method:
+                            <div class="fragment">[get]=> in accordance with the logic of the previous return a normal page;</div>
+                            <div class="fragment">[post]=> only return the required data of the front end.</div>
+                        </li>
+                        <li class="fragment">
+                            Front end developer use MVVM frame or other method to render page.
+                            <div class="fragment">{ certainly, in the rendering process, you can add your favorite animation. }</div>
+                        </li>
+                    </ol>
+                </section>
+                <section data-background-transition="zoom" data-background-color="#222">
+                    <img src="/images/1.png" alt="">
+                    <p class="fragment">talk is cheap, show me the code!</p>
+                </section>
+                <section style="text-align: left;" data-background-transition="zoom" data-background-color="#fff">
+                    <section>
+                        <p>html:</p>
+                    <pre>
+                        <code class="html">
+    <a href="/detail/11.html">新闻标题</a>
+    <a href="/detail/12.html">新闻标题</a>
+    <a href="/detail/13.html">新闻标题</a>
+    <a href="/detail/14.html">新闻标题</a>
+    <a href="/detail/15.html">新闻标题</a>
+                        </code>
+                    </pre>
+                        <p class="fragment">Mark internal links =></p>
+                        <pre class="fragment">
+                        <code class="html">
+    <a href="/detail/11.html" data-link>新闻标题</a>
+    <a href="/detail/12.html" data-link>新闻标题</a>
+    <a href="/detail/13.html" data-link>新闻标题</a>
+    <a href="/detail/14.html" data-link>新闻标题</a>
+    <a href="/detail/15.html" data-link>新闻标题</a>
+                        </code>
+                    </pre>
+                    </section>
+                </section>
+                <section style="text-align: left;" data-background-transition="zoom" data-background-color="#fff">
+                    <section>
+                        <p>javascript:</p>
+                    <pre>
+                        <code class="js">
+    (function(){
+        let links = document.querySelector('a[data-link]');
+        [].forEach.call(links, (link) => {
+            link.addEventListener('click', function(event){
+
+                event.preventDefault(); //prevent jump
+
+                let url = link.getAttribute('href');
+                $.http(url).post().then(function(res){
+                    // render page handle.
+                });
+            });
+        });
+    }).call(this);
+                        </code>
+                    </pre>
+                    </section>
+                </section>
+                <section style="text-align: left;" data-background-transition="zoom" data-background-color="#fff">
+                    <section>
+                        <p>server code:</p>
+                    <pre>
+                        <code class="coffee" style="max-height: 600px;">
+    module.exports = Controller("Article/BaseController", ->
+
+        showAction: (aid)->
+            self = @
+            if not isNaN(parseInt(aid))
+                D('article')
+                .query('select *,(select cat_name from that_article_cat where that_article.cat=that_article_cat.cid) as cat_name from that_article where (`id` = ' + aid + ') LIMIT 1')
+                .then((data)->
+
+                    data = data[0]
+
+                    self.assign(
+                        module : 'index'
+                        item : data
+                    )
+
+                    # Determine the request method
+                    if self.isGet() is yes
+                        self.display()
+                    else
+                        self.success(
+                            content:data['content']
+                        );
+                )
+            else
+                self.redirect('/')
+    )
+                        </code>
+                    </pre>
+                    </section>
+                </section>
+                <section data-background-transition="zoom" data-background-color="#222">
+                    <section style="text-align: left;">what's the point?</section>
+                    <section><h1>graceful degradation</h1></section>
+                </section>
+                <section data-background-transition="zoom" data-background-color="#fff">
+                    <p><span class="fragment fade-up">SEO &</span> <span class="fragment fade-up">& Ajax</span></p>
+                    <p class="fragment fade-up"> <em>"Now we are a couple!"</em></p>
+                    <img src="/images/2.png" class="fragment" style="box-shadow: none;">
+                </section>
+                <section style="text-align: left;" data-background-transition="zoom" data-background-color="#222">
+                    <h1>THE END</h1>
+                </section>
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				history: true,
+                transition: 'convex',
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
