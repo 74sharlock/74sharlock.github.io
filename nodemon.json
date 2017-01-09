@@ -1,0 +1,7 @@
+{
+  "watch": [
+    "gulpfile.js",
+    "balmrc.js",
+    "config/**"
+  ]
+}

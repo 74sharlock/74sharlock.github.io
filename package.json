@@ -1,0 +1,36 @@
+{
+  "name": "74sharlock.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "balmrc.js",
+  "dependencies": {
+    "animate.css": "^3.5.2",
+    "font-awesome": "^4.7.0",
+    "littlelib": "0.0.6",
+    "tan-dialog": "0.0.6-beta"
+  },
+  "devDependencies": {
+    "babel-plugin-component": "^0.6.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "balm": "^0.5.6",
+    "balm-ui": "^0.1.11-beta",
+    "gulp": "^3.9.1",
+    "nodemon": "^1.11.0",
+    "tan-dialog": "0.0.8-beta"
+  },
+  "scripts": {
+    "start": "nodemon --exec gulp",
+    "build": "gulp --production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/74sharlock/74sharlock.github.io.git"
+  },
+  "author": "74sharlock",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/74sharlock/74sharlock.github.io/issues"
+  },
+  "homepage": "https://github.com/74sharlock/74sharlock.github.io#readme"
+}
