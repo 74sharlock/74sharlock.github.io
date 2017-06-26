@@ -10,7 +10,7 @@
 <div id="app">
   <ul>
     <li v-for="(picture, index) in pictures">
-      <a :href="'./' + {{picture.page}} + '.html'">{{picture.name}} - {{picture.author}}</a>
+      <a :href="'./' + picture.page + '.html'">{{picture.name}} - {{picture.author}}</a>
       <span>{{progress(index)}}</span>
     </li>
   </ul>
