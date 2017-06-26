@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>城市猎人</title>
+  <script src="//cdn.bootcss.com/vue/2.3.4/vue.min.js"></script>
+  <script src="/javascripts/picture-data.js"></script>
+  <link rel="stylesheet" href="/css/picture.css">
+  <script>window.pictureIndex = 0;</script>
+</head>
+<body>
+<div id="app">
+  <div class="center">
+    <span :style="{backgroundImage: 'url(' + src + ')'}">
+      <template v-if="notFound">没有找到画面</template>
+    </span>
+  </div>
+
+  <div class="left" @click="prev"></div>
+  <div class="right" @click="next"></div>
+
+  <div class="top">
+    <div class="pager">
+      <span>第<i class="fw">{{volume}}</i>卷</span>
+      <span>第<i class="fw">{{section}}</i>面</span>
+      <span>可以使用键盘方向键快速切换</span>
+    </div>
+    <div class="btns">
+      <div class="btn" @click="prevVolume">上一卷</div>
+      <div class="btn" @click="nextVolume">下一卷</div>
+    </div>
+  </div>
+</div>
+
+<script src="/javascripts/picture.js"></script>
+</body>
+</html>
