@@ -42,16 +42,20 @@
         this.show();
       },
       show(){
+        this.src = '';
+        this.loading = true;
         let img = new Image();
         img.onload = () => {
           progress[pictureIndex] = `${this.volume},${this.section}`;
           localStorage.setItem('progress', JSON.stringify(progress));
           this.notFound = false;
+          this.loading = false;
           this.src = this.url;
         };
         img.onerror = () => {
           this.src = '';
           this.notFound = true;
+          this.loading = false;
         };
         img.src = this.url;
       }

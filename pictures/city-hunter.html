@@ -13,6 +13,7 @@
   <div class="center">
     <span :style="{backgroundImage: 'url(' + src + ')'}">
       <template v-if="notFound">没有找到画面</template>
+      <template v-if="loading">正在努力加载图片...</template>
     </span>
   </div>
 
