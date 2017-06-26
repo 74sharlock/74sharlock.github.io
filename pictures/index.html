@@ -30,7 +30,7 @@
         progress(index){
           let v = 1, s = 1;
           if(progress[index]){
-            let item = progress.split(',');
+            let item = progress[index].split(',');
             v = Number(item[0].trim());
             s = Number(item[1].trim())
           }
