@@ -4,3 +4,4 @@ window.pictures = [{
   author: '北条司',
   page: 'city-hunter'
 }];
+
