@@ -1,6 +1,6 @@
 (function (Vue, pictureIndex) {
 
-  const {prefix} = pictures[pictureIndex];
+  const {prefix, addZero} = pictures[pictureIndex];
 
   let volume = 1;
   let section = 1;
@@ -83,7 +83,7 @@
         return result;
       },
       url(){
-        return prefix(this.m, this.v);
+        return addZero ? prefix(this.m, this.v) : prefix(this.volume, this.section);
       }
     },
     created(){
