@@ -1,6 +1,6 @@
-(function (Vue, pictureKey) {
+(function (Vue, pictureIndex) {
 
-  const {prefix} = pictures[pictureKey];
+  const {prefix} = pictures[pictureIndex];
 
   let volume = 1;
   let section = 1;
@@ -9,13 +9,10 @@
 
   progress = progress ? JSON.parse(progress) : {};
 
-  if(progress[pictureKey]){
-    let picture = progress[pictureKey].split(',');
+  if(progress[pictureIndex]){
+    let picture = progress[pictureIndex].split(',');
     volume = Number(picture[0].trim());
     section = Number(picture[1].trim());
-  } else {
-    volume = 1;
-    section = 1;
   }
 
   let app = new Vue({
@@ -49,7 +46,7 @@
         this.loading = true;
         let img = new Image();
         img.onload = () => {
-          progress[pictureKey] = `${this.volume},${this.section}`;
+          progress[pictureIndex] = `${this.volume},${this.section}`;
           localStorage.setItem('progress', JSON.stringify(progress));
           this.notFound = false;
           this.loading = false;
@@ -119,4 +116,4 @@
     return false;
   };
 
-})(Vue, pictureKey);
+})(Vue, pictureIndex);
