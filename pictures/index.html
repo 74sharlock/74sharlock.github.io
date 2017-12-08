@@ -9,9 +9,9 @@
 <body>
 <div id="app">
   <ul>
-    <li v-for="(picture, index) in pictures">
+    <li v-for="(picture, index) in pictures" :key="picture.key">
       <a :href="'./' + picture.page + '.html'">{{picture.name}} - {{picture.author}}</a>
-      <span>{{progress(index)}}</span>
+      <span>{{progress(picture)}}</span>
     </li>
   </ul>
 </div>
@@ -27,10 +27,10 @@
         pictures
       },
       methods:{
-        progress(index){
+        progress({key}){
           let v = 1, s = 1;
-          if(progress[index]){
-            let item = progress[index].split(',');
+          if(progress[key]){
+            let item = progress[key].split(',');
             v = Number(item[0].trim());
             s = Number(item[1].trim())
           }

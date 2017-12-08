@@ -1,6 +1,6 @@
-(function (Vue, pictureIndex) {
+(function (Vue, pictureKey) {
 
-  const {prefix} = pictures[pictureIndex];
+  const {prefix} = pictures[pictureKey];
 
   let volume = 1;
   let section = 1;
@@ -9,8 +9,8 @@
 
   progress = progress ? JSON.parse(progress) : {};
 
-  if(progress[pictureIndex]){
-    let picture = progress[pictureIndex].split(',');
+  if(progress[pictureKey]){
+    let picture = progress[pictureKey].split(',');
     volume = Number(picture[0].trim());
     section = Number(picture[1].trim());
   }
@@ -46,7 +46,7 @@
         this.loading = true;
         let img = new Image();
         img.onload = () => {
-          progress[pictureIndex] = `${this.volume},${this.section}`;
+          progress[pictureKey] = `${this.volume},${this.section}`;
           localStorage.setItem('progress', JSON.stringify(progress));
           this.notFound = false;
           this.loading = false;
@@ -116,4 +116,4 @@
     return false;
   };
 
-})(Vue, pictureIndex);
+})(Vue, pictureKey);
