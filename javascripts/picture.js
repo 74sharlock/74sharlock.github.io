@@ -13,6 +13,9 @@
     let picture = progress[pictureKey].split(',');
     volume = Number(picture[0].trim());
     section = Number(picture[1].trim());
+  } else {
+    volume = 1;
+    section = 1;
   }
 
   let app = new Vue({
