@@ -1,3 +1,14 @@
+// ==UserScript==
+// @name         知乎pc辅助插件
+// @author       74sharlock
+// @namespace    none
+// @version      0.1
+// @description  try to take over the world!
+// @author       You
+// @match        https://www.zhihu.com/question/*
+// @grant        none
+// ==/UserScript==
+
 (function() {
 
   let styles = document.createElement('style');
@@ -108,4 +119,6 @@
     childList: true,
     subtree: true
   });
+
 })();
+
