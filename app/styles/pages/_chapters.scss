@@ -1,0 +1,15 @@
+.page--chapters {
+  padding: rem($gap-m);
+
+  .chapters {
+    .item {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: rem(42);
+      color: #333;
+      font-size: 18px;
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,0 +1,7 @@
+@function rem($size) {
+  @return ($size / $rem) + rem;
+}
+
+@function percent($num) {
+  @return $num*100%;
+}

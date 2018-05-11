@@ -1,0 +1,25 @@
+$rem: 37.5;
+
+/// 配色
+$primaryBgColor: white;
+$secondaryBgColor: rgba(255, 112, 76, 0.15);
+$primaryColor: #f95855;
+$secondaryColor: #ff704d;
+$linkColor: $secondaryColor;
+$textPrimaryColor: #333;
+$textSecondaryColor: #808080;
+$borderColor: #dfdfdf;
+$buttonColor: white;
+
+/// 字号
+$fontSize-s: 12px;
+$fontSize-m: 14px;
+$fontSize-l: 16px;
+$fontSize-xl: 20px;
+$fontSize-xxl: 36px;
+/// 头像
+$avatar-m: 44;
+$avatar-l: 60;
+/// 页面容器左右留白空间
+$gap-m: 15;
+$gap-l: 30;

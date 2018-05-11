@@ -1,7 +1,7 @@
-var balm = require('balm');
-var config = require('./balmrc');
-var server = require('./config/server');
-var scripts = require('./config/script');
+const balm = require('balm');
+const config = require('./balmrc');
+const server = require('./config/server');
+const scripts = require('./config/script');
 
 balm.config = {
   server,
@@ -10,8 +10,8 @@ balm.config = {
   },
   paths: {
     source: {
-      css: 'css',
-      js: 'js'
+      css: 'styles',
+      js: 'scripts'
     }
   },
   styles: {
@@ -23,16 +23,4 @@ balm.config = {
   assets: {}
 };
 
-balm.go(function(mix) {
-  if (balm.config.production) {
-    // filter assets svg
-    mix.remove('./dist/a/img/*.svg');
-    mix.copy('./app/images/*.svg', './dist/a/img');
-    // for static
-    mix.publish();
-    // for html
-    Object.keys(config.publish).forEach(function(key) {
-      mix.publish(key, config.publish[key].target, config.publish[key].option || {});
-    });
-  }
-});
+balm.go(function(mix) {});

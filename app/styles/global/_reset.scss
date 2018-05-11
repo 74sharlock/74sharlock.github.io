@@ -1,0 +1,44 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+dl,
+dd {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+
+  color: $linkColor;
+}
+
+b {
+  font-weight: normal;
+
+  color: $secondaryColor;
+}
+
+body {
+  background-color: #f9f3e3;
+}
+
+#app {
+  width: 100%;
+
+  -webkit-overflow-scrolling: touch;
+}
+
+* {
+  word-break: break-all;
+}
