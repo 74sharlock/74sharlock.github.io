@@ -33,7 +33,6 @@
 </template>
 <script>
 import leftSide from 'components/left-side';
-import Swiper from 'swiper';
 
 export default {
   components: {
