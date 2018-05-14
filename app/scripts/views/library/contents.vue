@@ -113,8 +113,8 @@ export default {
     }
   },
   async mounted() {
-    this.getContents();
-    await this.getChapters();
+    this.getChapters();
+    await this.getContents();
     let autoMark = localStorage.getItem('autoMark');
     if (autoMark) {
       let mark = JSON.parse(autoMark);
