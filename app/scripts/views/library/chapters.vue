@@ -5,7 +5,7 @@
       class="item" 
       v-for="chapter in chapters" 
       :key="chapter.id" 
-      :to="{name: 'book', params: {id: `${id}-${chapter.id}`}}">
+      :to="{name: 'contents', params: {id: `${id}-${chapter.id}`}}">
         {{chapter.name}}
       </router-link>
     </div>

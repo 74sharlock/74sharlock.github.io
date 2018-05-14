@@ -9,6 +9,7 @@
     "balm-ui-lite": "^1.3.0",
     "font-awesome": "^4.7.0",
     "littlelib": "0.0.6",
+    "swiper": "^4.2.6",
     "tan-dialog": "0.0.6-beta",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1"

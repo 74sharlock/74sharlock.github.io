@@ -2,21 +2,19 @@ import Vue from 'vue';
 import router from './routes';
 import App from 'views/layout/app';
 
-import UiLayoutComponents from 'balm-ui-lite/components/layout';
 import UiButton from 'balm-ui-lite/components/button';
+import UiSpinner from 'balm-ui-lite/components/spinner';
 
 import $store from 'plugins/$store';
 import $http from 'plugins/$http';
-
-for (let key in UiLayoutComponents) {
-  let Component = UiLayoutComponents[key];
-  Vue.component(Component.name, Component);
-}
+import $bus from 'plugins/$bus';
 
 Vue.component(UiButton.name, UiButton);
+Vue.component(UiSpinner.name, UiSpinner);
 
 Vue.use($store);
 Vue.use($http);
+Vue.use($bus);
 
 new Vue({
   components: { App },

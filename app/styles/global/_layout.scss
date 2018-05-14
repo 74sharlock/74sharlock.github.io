@@ -6,3 +6,20 @@
 
   -webkit-overflow-scrolling: touch;
 }
+
+.ui-mask {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  .mdl-spinner {
+    width: rem(80);
+    height: rem(80);
+  }
+}

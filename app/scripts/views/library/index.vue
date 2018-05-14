@@ -1,7 +1,7 @@
 <template>
   <div class="page--library">
     <div class="books">
-      <router-link class="item" v-for="book in books" :key="book.id" :to="{name: 'chapter', params: {id: book.id}}">
+      <router-link class="item" v-for="book in books" :key="book.id" :to="{name: 'contents', params: {id: `${book.id}-1`}}">
         <div class="inner">
           <div class="cover">
             <span :style="setBg(book)"></span>

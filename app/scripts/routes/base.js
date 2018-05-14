@@ -1,7 +1,9 @@
 import NotFound from 'views/not-found';
 
+import getBooks from './middleware';
+
 const Library = () => import('views/library/index');
-const List = () => import('views/library/list');
+const Chapters = () => import('views/library/Chapters');
 const Contents = () => import('views/library/contents');
 
 export default [
@@ -9,17 +11,20 @@ export default [
     path: '/library',
     name: 'library',
     component: Library,
+    beforeEnter: getBooks,
     alias: '/'
   },
   {
-    path: '/chapter/:id',
-    name: 'chapter',
-    component: List
+    path: '/chapters/:id',
+    name: 'chapters',
+    component: Chapters,
+    beforeEnter: getBooks
   },
   {
-    path: '/book/:id',
-    name: 'book',
-    component: Contents
+    path: '/contents/:id',
+    name: 'contents',
+    component: Contents,
+    beforeEnter: getBooks
   },
   {
     path: '*',

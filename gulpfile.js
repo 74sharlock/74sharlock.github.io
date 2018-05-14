@@ -23,4 +23,8 @@ balm.config = {
   assets: {}
 };
 
-balm.go(function(mix) {});
+balm.go(function(mix) {
+  if (balm.config.production) {
+    mix.copy('./node_modules/balm-ui-lite/font/*.*', './fiction/font/');
+  }
+});
