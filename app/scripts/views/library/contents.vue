@@ -13,19 +13,11 @@
           {{chapter.name}}
         </router-link>
       </div>  
-    </left-side>  
-    <div class="tools">
-      <div class="menu-btn" @click="show=true">
-        <i class="material-icons">menu</i>
-      </div>
-      <div class="actions">
-        <div class="menu-btn" @click="plus">A <sup>+</sup> </div>
-        <div class="menu-btn" @click="reduce">A <sup>-</sup> </div>
-      </div>
-    </div>
+    </left-side>
+    
     <div class="contents" @scroll="scroll($event)">
-      <h5 class="chapter-name">{{chapter.name}}</h5>
-      <div class="content-data" :style="style">
+      <div class="content-data" :style="style" v-reader>
+        <h5 class="chapter-name">{{chapter.name}}</h5>
         <p v-for="(data, index) in contents" :key="index" v-html="data"></p>
       </div>
     </div>
@@ -33,6 +25,7 @@
 </template>
 <script>
 import leftSide from 'components/left-side';
+import reader from 'directives/reader';
 
 export default {
   components: {
@@ -47,6 +40,7 @@ export default {
       fontSize: 18
     };
   },
+  directives: { reader },
   computed: {
     bookId() {
       return this.$route.params.id.split('-')[0];
