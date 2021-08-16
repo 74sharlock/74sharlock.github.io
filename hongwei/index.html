@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="zh_cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0,viewport-fit=cover">
+    <meta name="format-detection" content="telephone=no">
+    <meta itemprop="image" content="/apple-touch-icon-144x144-precomposed.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144x144-precomposed.png">
+    <link rel="stylesheet" href="./hongwei.css">
+    <title>宏伟之屋</title>
+    <style>
+      #app {
+        display: none;
+      }
+      #app[mounted] {
+        display: initial;
+      }
+
+      .answer.error {
+        color: rgb(182, 23, 23)
+      }
+
+      .answer.success {
+        color: rgb(16, 173, 16);
+      }
+      fieldset {
+        position: relative;
+        margin-bottom: 16px;
+      }
+
+      .close-btn {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="questions" v-for="(question, quesIndex) in questions" :key="quesIndex">
+        <h3 class="title">{{ quesIndex + 1 }}、{{ question.title }} ？</h3>
+        <p v-for="(option, index) in question.options" :key="index">
+          <label>
+            <input type="radio" :value="option" v-model="answers[quesIndex]" :name="`answers[${quesIndex}]`">
+            {{ index | numberToLetter }}.
+            {{ option }}
+          </label>
+        </p>
+      </div>
+      <fieldset v-if="showMyAnswer">
+        <legend>我的答案</legend>
+        <div class="show-preview">
+        <div :class="['answer', answer === questions[number].answer ? 'success' : 'error']" v-for="(answer, number) in answers" :key="number">
+          <p>{{ +number + 1}}、{{ questions[number].title }} ？</p>
+          <p>
+            我的回答：{{ answer }}
+            <br>
+            正确答案：{{ questions[number].answer }}
+          </p>
+        </div>
+        <button class="close-btn" @click="showMyAnswer = false">关闭面板</button>
+      </div>
+      </fieldset>
+      
+      <div style="text-align: center;">
+        <button @click="resetQuestions">重置题目</button>
+        <button @click="previewAnswers">查看我的回答</button>
+        <button @click="submit">提交</button>
+      </div>
+    </div>
+    <script src="//unpkg.com/vue"></script>
+    <script src="./hongwei.js" type="module"></script>
+  </body>
+  </html>
