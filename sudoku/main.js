@@ -50,6 +50,7 @@ function selectCell(row, col) {
   cellElement.classList.add('selected');
   selectedCell = cellElement;
 
+  document.querySelector('input').focus();
   document.addEventListener('keydown', handleKeyboardInput);
 }
 
