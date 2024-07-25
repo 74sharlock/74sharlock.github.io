@@ -1,0 +1,89 @@
+#sudoku-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+#sudoku-board {
+  display: grid;
+  grid-template-columns: repeat(9, 50px);
+  grid-template-rows: repeat(9, 50px);
+  gap: 1px;
+  background-color: #ccc;
+  padding: 5px;
+}
+
+.cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.cell {
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+
+/* .cell.row-0, */
+.cell.row-3,
+.cell.row-6 {
+  border-top: 5px solid #ccc;
+}
+
+/* .cell.col-0, */
+.cell.col-3,
+.cell.col-6 {
+  border-left: 5px solid #ccc;
+}
+
+.cell.empty {
+  background-color: #f0f0f0;
+}
+
+.cell.selected {
+  background-color: #e0e0e0;
+}
+
+.cell.invalid {
+  background-color: #ffc0c0;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+.controls button,
+.controls select {
+  font-size: 16px;
+  padding: 8px 16px;
+  margin: 0 10px;
+}
+
+#fireworks-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#fireworks-canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.hidden {
+  display: none !important;
+}
