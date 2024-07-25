@@ -49,8 +49,6 @@ function selectCell(row, col) {
   ];
   cellElement.classList.add('selected');
   selectedCell = cellElement;
-
-  document.querySelector('input').focus();
   document.addEventListener('keydown', handleKeyboardInput);
 }
 
@@ -99,12 +97,16 @@ function renderBoard() {
 }
 
 function createCell(row, col) {
-  const cellElement = document.createElement('div');
+  const cellElement = document.createElement('label');
   cellElement.classList.add('cell');
+
   if (sudokuBoard[row][col] !== 0) {
-    cellElement.textContent = sudokuBoard[row][col].toString();
+    cellElement.innerHTML = `<span>${sudokuBoard[row][
+      col
+    ].toString()}</span><input type="text" />`;
   } else {
     cellElement.classList.add('empty');
+    cellElement.innerHTML = `<span></span><input type="text" />`;
   }
   return cellElement;
 }
@@ -247,11 +249,13 @@ function updateCell(row, col, value) {
   const cellElement = document.querySelectorAll('#sudoku-board .cell')[
     row * 9 + col
   ];
+  const span = cellElement.querySelector('span');
+  const input = cellElement.querySelector('input');
   if (value === 0) {
-    cellElement.textContent = '';
+    span.textContent = '';
     cellElement.classList.add('empty');
   } else {
-    cellElement.textContent = value.toString();
+    span.textContent = value.toString();
     cellElement.classList.remove('empty');
   }
   checkWin();
