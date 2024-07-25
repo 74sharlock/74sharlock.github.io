@@ -119,6 +119,11 @@ function showFireworksAnimation() {
   const fireworks = [];
   const particles = [];
 
+  let audio1 = new Audio();
+  let audio2 = new Audio();
+  audio1.src = './1.mp3';
+  audio2.src = './2.mp3';
+
   function animate() {
     requestAnimationFrame(animate);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -132,7 +137,7 @@ function showFireworksAnimation() {
     fireworks.forEach((firework, i) => {
       firework.update();
       firework.draw();
-
+      audio1.play();
       if (firework.done) {
         fireworks.splice(i, 1);
       }
@@ -141,7 +146,7 @@ function showFireworksAnimation() {
     particles.forEach((particle, i) => {
       particle.update();
       particle.draw();
-
+      audio2.play();
       if (particle.done) {
         particles.splice(i, 1);
       }
@@ -302,3 +307,5 @@ document.querySelector('.numbers').addEventListener('click', handleButtonInput);
 
 initWorker();
 newGame();
+
+window.showFireworksAnimation = showFireworksAnimation;
