@@ -284,7 +284,7 @@ function isValid(board, row, col, num) {
 }
 
 function handleButtonInput({ target }) {
-  if (selectedCell && target.nodeName.toLowerCase() === 'button') {
+  if (selectedCell && target.nodeName.toLowerCase() === 'span') {
     let number = target.textContent;
     const row = selectedCell.getAttribute('data-row');
     const col = selectedCell.getAttribute('data-col');
