@@ -49,6 +49,7 @@ function selectCell(row, col) {
   ];
   cellElement.classList.add('selected');
   selectedCell = cellElement;
+
   document.addEventListener('keydown', handleKeyboardInput);
 }
 
@@ -57,11 +58,8 @@ function handleKeyboardInput(event) {
     return;
   }
 
-  const row = Math.floor(
-    Array.from(selectedCell.parentElement.children).indexOf(selectedCell) / 9
-  );
-  const col =
-    Array.from(selectedCell.parentElement.children).indexOf(selectedCell) % 9;
+  const row = selectedCell.getAttribut('data-row');
+  const col = selectedCell.getAttribut('data-col');
 
   if (event.key >= '1' && event.key <= '9') {
     const num = parseInt(event.key);
@@ -90,6 +88,8 @@ function renderBoard() {
     for (let col = 0; col < 9; col++) {
       const cellElement = createCell(row, col);
       cellElement.classList.add(`row-${row}`, `col-${col}`);
+      cellElement.setAttribute('data-row', row);
+      cellElement.setAttribute('data-col', col);
       cellElement.addEventListener('click', () => selectCell(row, col));
       boardElement.appendChild(cellElement);
     }
@@ -97,16 +97,12 @@ function renderBoard() {
 }
 
 function createCell(row, col) {
-  const cellElement = document.createElement('label');
+  const cellElement = document.createElement('div');
   cellElement.classList.add('cell');
-
   if (sudokuBoard[row][col] !== 0) {
-    cellElement.innerHTML = `<span>${sudokuBoard[row][
-      col
-    ].toString()}</span><input type="text" />`;
+    cellElement.textContent = sudokuBoard[row][col].toString();
   } else {
     cellElement.classList.add('empty');
-    cellElement.innerHTML = `<span></span><input type="text" />`;
   }
   return cellElement;
 }
@@ -245,20 +241,17 @@ function checkWin() {
 }
 
 function updateCell(row, col, value) {
-  sudokuBoard[row][col] = value;
-  const cellElement = document.querySelectorAll('#sudoku-board .cell')[
-    row * 9 + col
-  ];
-  const span = cellElement.querySelector('span');
-  const input = cellElement.querySelector('input');
-  if (value === 0) {
-    span.textContent = '';
-    cellElement.classList.add('empty');
-  } else {
-    span.textContent = value.toString();
-    cellElement.classList.remove('empty');
+  if (selectedCell) {
+    sudokuBoard[row][col] = value;
+    if (value === 0) {
+      selectedCell.textContent = '';
+      selectedCell.classList.add('empty');
+    } else {
+      selectedCell.textContent = value;
+      selectedCell.classList.remove('empty');
+    }
+    checkWin();
   }
-  checkWin();
 }
 
 function isValid(board, row, col, num) {
@@ -290,8 +283,18 @@ function isValid(board, row, col, num) {
   return true;
 }
 
+function handleButtonInput({ target }) {
+  if (selectedCell && target.nodeName.toLowerCase() === 'button') {
+    let number = target.textContent;
+    const row = selectedCell.getAttribute('data-row');
+    const col = selectedCell.getAttribute('data-col');
+    updateCell(row, col, number);
+  }
+}
+
 document.getElementById('new-game-button').addEventListener('click', newGame);
 document.getElementById('solve-button').addEventListener('click', solveGame);
+document.querySelector('.numbers').addEventListener('click', handleButtonInput);
 
 initWorker();
 newGame();
