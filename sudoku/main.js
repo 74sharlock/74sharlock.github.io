@@ -248,7 +248,7 @@ function updateCell(row, col, value) {
       selectedCell.classList.add('empty');
     } else {
       selectedCell.textContent = value;
-      selectedCell.classList.remove('empty');
+      // selectedCell.classList.remove('empty');
     }
     checkWin();
   }
@@ -284,7 +284,11 @@ function isValid(board, row, col, num) {
 }
 
 function handleButtonInput({ target }) {
-  if (selectedCell && target.nodeName.toLowerCase() === 'span') {
+  if (
+    selectedCell &&
+    selectedCell.classList.contains('empty') &&
+    target.nodeName.toLowerCase() === 'span'
+  ) {
     let number = target.textContent;
     const row = selectedCell.getAttribute('data-row');
     const col = selectedCell.getAttribute('data-col');
