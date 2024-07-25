@@ -30,6 +30,8 @@ body {
   cursor: pointer;
   box-sizing: border-box;
   border: 1px solid #ccc;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 /* .cell.row-0, */
@@ -46,9 +48,10 @@ body {
 
 .cell.empty {
   background-color: #f0f0f0;
+  color: blue;
 }
 
-.cell.selected {
+.cell.empty.selected {
   background-color: #e0e0e0;
 }
 
