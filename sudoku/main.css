@@ -56,6 +56,8 @@
 }
 
 .controls {
+  display: flex;
+  align-items: center;
   margin-top: 20px;
 }
 
@@ -64,6 +66,7 @@
   font-size: 16px;
   padding: 8px 16px;
   margin: 0 10px;
+  flex-shrink: 0;
 }
 
 #fireworks-container {
@@ -86,4 +89,15 @@
 
 .hidden {
   display: none !important;
+}
+
+@media (max-width: 414px) {
+  #sudoku-board {
+    grid-template-columns: repeat(9, 36px);
+    grid-template-rows: repeat(9, 36px);
+  }
+  .cell {
+    width: 36px;
+    height: 36px;
+  }
 }

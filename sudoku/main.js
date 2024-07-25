@@ -14,7 +14,7 @@ function initWorker() {
         isGeneratingNewGame = false;
         const newGameButton = document.getElementById('new-game-button');
         newGameButton.disabled = false;
-        newGameButton.textContent = 'New Game';
+        newGameButton.textContent = '新游戏';
         break;
       case 'solve':
         sudokuBoard = event.data.board;
@@ -30,7 +30,7 @@ function newGame() {
 
   const newGameButton = document.getElementById('new-game-button');
   newGameButton.disabled = true;
-  newGameButton.textContent = 'Generating New Game...';
+  newGameButton.textContent = '呀...';
 
   difficulty = document.getElementById('difficulty-select').value;
   worker.postMessage({ type: 'newGame', difficulty });
