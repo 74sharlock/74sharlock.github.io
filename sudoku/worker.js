@@ -1,7 +1,8 @@
 function generateSudokuBoard(difficulty) {
-  let board = Array.from({ length: 9 }, () =>
+  const board = Array.from({ length: 9 }, () =>
     Array.from({ length: 9 }, () => 0)
   );
+  board[0][0] = Math.floor(Math.random() * 9) + 1; // 随机填充第一个单元格
   fillBoard(board);
 
   let numToRemove;
@@ -46,6 +47,7 @@ function generateSudokuBoard(difficulty) {
 function solveSudoku(board) {
   for (let row = 0; row < 9; row++) {
     for (let col = 0; col < 9; col++) {
+      if (row === 0 && col === 0) continue;
       if (board[row][col] === 0) {
         for (let num = 1; num <= 9; num++) {
           if (isValid(board, row, col, num)) {

@@ -3,6 +3,8 @@ let selectedCell = null;
 let difficulty = 'easy';
 let isGeneratingNewGame = false;
 let worker;
+let audio1 = document.querySelector('.audio1');
+let audio2 = document.querySelector('.audio2');
 
 function initWorker() {
   worker = new Worker(`worker.js?t=${Date.now()}`);
@@ -58,8 +60,8 @@ function handleKeyboardInput(event) {
     return;
   }
 
-  const row = selectedCell.getAttribut('data-row');
-  const col = selectedCell.getAttribut('data-col');
+  const row = selectedCell.getAttribute('data-row');
+  const col = selectedCell.getAttribute('data-col');
 
   if (event.key >= '1' && event.key <= '9') {
     const num = parseInt(event.key);
@@ -119,38 +121,55 @@ function showFireworksAnimation() {
   const fireworks = [];
   const particles = [];
 
-  let audio1 = new Audio();
-  let audio2 = new Audio();
-  audio1.src = './1.mp3';
-  audio2.src = './2.mp3';
+  function isAudioPlaying(audio) {
+    return !audio.paused && audio.currentTime > 0 && !audio.ended;
+  }
 
-  function animate() {
-    requestAnimationFrame(animate);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  let lastFireworkTime = 0;
+  const fireworkInterval = 1000; // 500 毫秒生成一次新的烟花
 
-    // 添加新的烟花
-    if (Math.random() < 0.1) {
-      fireworks.push(new Firework());
+  const maxFireworks = 5; // 同屏最多 10 个烟花
+
+  let animationRunning = true;
+
+  function animate(timestamp) {
+    if (animationRunning) {
+      requestAnimationFrame(animate);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // 添加新的烟花
+      if (
+        fireworks.length < maxFireworks &&
+        timestamp - lastFireworkTime > fireworkInterval
+      ) {
+        fireworks.push(new Firework());
+        lastFireworkTime = timestamp;
+      }
+
+      // 更新和渲染烟花和粒子
+      fireworks.forEach((firework, i) => {
+        firework.update();
+        firework.draw();
+        if (!isAudioPlaying(audio1)) {
+          audio1.play();
+        }
+        if (firework.done) {
+          fireworks.splice(i, 1);
+          firework.explode();
+        }
+      });
+
+      particles.forEach((particle, i) => {
+        particle.update();
+        particle.draw();
+        if (!isAudioPlaying(audio2)) {
+          audio2.play();
+        }
+        if (particle.done) {
+          particles.splice(i, 1);
+        }
+      });
     }
-
-    // 更新和渲染烟花和粒子
-    fireworks.forEach((firework, i) => {
-      firework.update();
-      firework.draw();
-      audio1.play();
-      if (firework.done) {
-        fireworks.splice(i, 1);
-      }
-    });
-
-    particles.forEach((particle, i) => {
-      particle.update();
-      particle.draw();
-      audio2.play();
-      if (particle.done) {
-        particles.splice(i, 1);
-      }
-    });
   }
 
   class Firework {
@@ -170,7 +189,6 @@ function showFireworksAnimation() {
 
       if (this.y <= this.targetY) {
         this.done = true;
-        this.explode();
       }
     }
 
@@ -186,7 +204,8 @@ function showFireworksAnimation() {
     }
 
     explode() {
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < 50; i++) {
+        // 每个烟花爆炸生成 50 个粒子
         particles.push(new Particle(this.x, this.y));
       }
     }
@@ -222,11 +241,14 @@ function showFireworksAnimation() {
     }
   }
 
-  animate();
+  animate(performance.now());
 
   fireworksContainer.addEventListener('click', () => {
     fireworksContainer.classList.add('hidden');
+    audio1.pause();
+    audio2.pause();
     document.getElementById('solve-button').disabled = false;
+    animationRunning = false;
   });
 }
 
