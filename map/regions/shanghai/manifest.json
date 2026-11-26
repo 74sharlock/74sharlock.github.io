@@ -1,0 +1,15 @@
+{
+  "id": "shanghai",
+  "name": "上海市",
+  "crs": "GCJ02",
+  "bbox": [120.85, 30.67, 122.25, 31.88],
+  "defaultView": { "center": [121.4737, 31.2304], "zoom": 14 },
+  "dataFiles": [
+    { "file": "districts.geojson", "crs": "GCJ02", "kind": "districts" }
+  ],
+  "precision": {
+    "level": "示意级",
+    "source": "区级行政区划轮廓，商业地图背景的简化边界，非测绘标准边界，不可作为测量依据",
+    "crsNote": "bbox 与 defaultView 一律使用 WGS84；dataFiles 各自声明 crs，缺省取顶层 crs"
+  }
+}
